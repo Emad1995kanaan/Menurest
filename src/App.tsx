@@ -19,8 +19,8 @@ export default function App() {
 
   // Initialize audio
   useEffect(() => {
-    // Relaxing ambient piano background music
-    audioRef.current = new Audio("https://cdn.pixabay.com/audio/2021/11/24/audio_b2f9fa2642.mp3");
+    // Jazz/Lofi relaxing background music
+    audioRef.current = new Audio("https://cdn.pixabay.com/audio/2022/11/22/audio_febc508520.mp3");
     audioRef.current.loop = true;
     audioRef.current.volume = 0.4;
     return () => {
