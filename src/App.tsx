@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Coffee, CupSoda, CakeSlice, Utensils, ChevronUp, ChevronRight, ChevronLeft, Volume2, VolumeX } from "lucide-react";
+import { Coffee, CupSoda, CakeSlice, Utensils, ChevronUp, ChevronRight, ChevronLeft, Volume2, VolumeX, Sparkles } from "lucide-react";
 import { menuData, MenuCategory } from "./data";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -19,8 +19,8 @@ export default function App() {
 
   // Initialize audio
   useEffect(() => {
-    // Jazz/Lofi relaxing background music
-    audioRef.current = new Audio("https://cdn.pixabay.com/audio/2022/11/22/audio_febc508520.mp3");
+    // Relaxing ambient piano background music
+    audioRef.current = new Audio("https://cdn.pixabay.com/audio/2021/11/24/audio_b2f9fa2642.mp3");
     audioRef.current.loop = true;
     audioRef.current.volume = 0.4;
     return () => {
@@ -68,19 +68,70 @@ export default function App() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#111] text-center px-4"
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black text-center overflow-hidden px-4"
           >
+            {/* Elegant Background Image with Ken Burns */}
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="mb-8"
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 15, ease: "linear" }}
+              className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=2070')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-[#111] z-10" />
+
+            {/* Glowing Backdrop for Logo */}
+            <motion.div
+              animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#D4AF37]/20 rounded-full blur-[80px] z-10 pointer-events-none"
+            />
+            
+            {/* Floating Gold Particles */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+               {Array.from({ length: 15 }).map((_, i) => (
+                 <motion.div
+                    key={i}
+                    className="absolute bg-[#D4AF37] rounded-full opacity-40 shadow-[0_0_10px_#D4AF37]"
+                    style={{
+                       width: Math.random() * 4 + 2 + 'px',
+                       height: Math.random() * 4 + 2 + 'px',
+                       top: Math.random() * 100 + '%',
+                       left: Math.random() * 100 + '%',
+                    }}
+                    animate={{
+                       y: [0, -100, 0],
+                       opacity: [0, 0.8, 0],
+                    }}
+                    transition={{
+                       duration: Math.random() * 4 + 4,
+                       repeat: Infinity,
+                       ease: "easeInOut",
+                       delay: Math.random() * 2
+                    }}
+                 />
+               ))}
+            </div>
+
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+              className="relative z-30 mb-8"
             >
-              <Utensils size={72} className="text-[#D4AF37] mx-auto mb-6" />
-              <h1 className="text-6xl font-bold tracking-tight text-[#D4AF37] font-['Cairo'] drop-shadow-lg mb-4">
+              <div className="relative w-24 h-24 mx-auto mb-8 flex items-center justify-center">
+                <Utensils size={64} className="text-[#D4AF37] relative z-10" />
+                <motion.div 
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 rounded-full border border-dashed border-[#D4AF37]/40 z-0"
+                />
+              </div>
+              <h1 className="text-6xl sm:text-7xl font-bold tracking-tight text-[#D4AF37] font-['Cairo'] drop-shadow-[0_0_15px_rgba(212,175,55,0.3)] mb-4">
                 جوليا
               </h1>
-              <p className="text-xl text-gray-300 font-light font-['Cairo'] mb-12">
+              <p className="text-xl sm:text-2xl text-gray-300 font-light font-['Cairo'] mb-12 italic">
                 حيث يلتقي المذاق بالأصالة...
               </p>
             </motion.div>
@@ -88,11 +139,15 @@ export default function App() {
             <motion.button
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 1 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212, 175, 55, 0.6)" }}
+              transition={{ delay: 1, duration: 0.8 }}
               onClick={handleEnterMenu}
-              className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-full text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:bg-[#F3E5AB] transition-colors"
+              className="relative z-30 px-10 py-4 bg-gradient-to-r from-[#D4AF37] to-[#AA8B2C] text-black font-bold rounded-full text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all overflow-hidden group"
             >
-              عرض المنيو
+              <span className="relative z-10 flex items-center gap-2">
+                عرض المنيو
+              </span>
+              <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
             </motion.button>
           </motion.div>
         )}
@@ -193,23 +248,28 @@ export default function App() {
               transition={{ duration: 0.5 }}
             >
               {/* Category Header with Image */}
+              {/* Back Button (Fixed & Animated) */}
+              <motion.button
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+                transition={{ 
+                  y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                  x: { duration: 0.5, ease: "easeOut" },
+                  opacity: { duration: 0.5 }
+                }}
+                onClick={() => setSelectedCategory(null)}
+                className="fixed top-4 right-4 z-50 flex items-center gap-2 bg-[#D4AF37]/90 text-black backdrop-blur-md px-5 py-2.5 rounded-full hover:bg-[#D4AF37] transition-colors shadow-[0_0_20px_rgba(212,175,55,0.4)] border border-[#AA8B2C] group"
+              >
+                <ChevronRight size={20} className="transform group-hover:translate-x-1 transition-transform" />
+                <span className="font-bold">العودة للقائمة</span>
+              </motion.button>
+
               <div className="relative h-[30vh] sm:h-[40vh] w-full overflow-hidden">
                  <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url('${selectedCategory.image}')` }}
                 />
                 <div className="absolute inset-0 bg-black/70 z-10" />
-                
-                {/* Back Button Header */}
-                <div className="absolute top-0 left-0 right-0 p-4 z-30 flex justify-end">
-                  <button
-                    onClick={() => setSelectedCategory(null)}
-                    className="flex items-center gap-2 bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-white hover:text-[#D4AF37] transition-colors border border-white/10 hover:border-[#D4AF37]/50"
-                  >
-                    <span className="font-medium">العودة للقائمة</span>
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
                 
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center mt-8">
                   <div className="text-[#D4AF37] mb-4 bg-black/40 p-4 rounded-full backdrop-blur-sm">
@@ -234,8 +294,14 @@ export default function App() {
                     >
                       <div className="flex-1">
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2 gap-2">
-                          <h3 className="text-lg sm:text-xl font-semibold text-gray-100 group-hover:text-[#D4AF37] transition-colors">
+                          <h3 className="text-lg sm:text-xl font-semibold text-gray-100 group-hover:text-[#D4AF37] transition-colors flex items-center gap-2 flex-wrap">
                             {item.name}
+                            {item.isPopular && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs bg-[#D4AF37]/20 text-[#D4AF37] font-medium border border-[#D4AF37]/30 whitespace-nowrap">
+                                <Sparkles size={12} fill="currentColor" className="text-[#D4AF37]" />
+                                مميز
+                              </span>
+                            )}
                           </h3>
                           <div className="flex items-center gap-1.5 bg-[#222] px-4 py-1.5 rounded-full text-[#D4AF37] font-bold w-fit">
                             <span className="text-lg">{item.price}</span>
