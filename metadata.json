@@ -1,0 +1,6 @@
+{
+  "name": "جوليا رستوران وكافيه - المنيو الرقمي",
+  "description": "تجربة طعام راقية ومميزة مع أرقى المأكولات والمشروبات. منيو رقمي تفاعلي.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
